@@ -54,4 +54,9 @@ public class Owner {
     public void setAddress(String address) {
         this.address = address;
     }
+
+    @Override
+    public String toString() {
+        return "Owner{id=%d, name='%s', phoneNumber='%s', address='%s'}".formatted(id, name, phoneNumber, address);
+    }
 }
