@@ -1,7 +1,9 @@
 package org.jetbrains.test.multids.configuration;
 
+import org.springframework.beans.factory.BeanClassLoaderAware;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -9,7 +11,14 @@ import org.springframework.context.annotation.Primary;
 import javax.sql.DataSource;
 
 @Configuration
-public class DatasourceConfig {
+public class DatasourceConfig implements BeanClassLoaderAware {
+
+    private ClassLoader classloader;
+
+    @Override
+    public void setBeanClassLoader(ClassLoader classLoader) {
+        this.classloader = classLoader;
+    }
 
     @Bean
     @ConfigurationProperties("spring.datasource.ds1")
@@ -38,4 +47,14 @@ public class DatasourceConfig {
                 .build();
     }
 
+    @Bean
+    public DataSource ds3DataSource() {
+        return DataSourceBuilder
+                .create(classloader)
+                .driverClassName("org.apache.derby.iapi.jdbc.AutoloadedDriver")
+                .url("jdbc:derby:derbyDB;create=true")
+                .username("")
+                .password("")
+                .build();
+    }
 }
