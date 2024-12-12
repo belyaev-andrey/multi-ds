@@ -1,6 +1,5 @@
 package org.jetbrains.test.multids.owner;
 
-import org.hibernate.ObjectNotFoundException;
 import org.springframework.stereotype.Service;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +14,7 @@ class OwnerService {
     }
 
     @Transactional(readOnly = true, transactionManager = "ds1TransactionManager")
-    OwnerDto getOwner(Long id) {
+    OwnerDto findById(Long id) {
         return ownerRepository.findById(id)
                 .map(OwnerDto::new)
                 .orElseThrow(() -> new EntityNotFoundException("Owner with id %d not found".formatted(id)));

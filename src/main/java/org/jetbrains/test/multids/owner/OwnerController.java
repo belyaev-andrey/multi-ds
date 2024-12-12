@@ -1,5 +1,7 @@
 package org.jetbrains.test.multids.owner;
 
+import jakarta.persistence.EntityNotFoundException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -13,8 +15,14 @@ class OwnerController {
     }
 
     @GetMapping("/{id}")
-    public @ResponseBody OwnerDto findById(@PathVariable Long id){
-        return ownerService.getOwner(id);
+    public @ResponseBody ResponseEntity<OwnerDto> findById(@PathVariable Long id){
+        try {
+            return ResponseEntity.ok(ownerService.findById(id));
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().build();
+        }
     }
 
 }

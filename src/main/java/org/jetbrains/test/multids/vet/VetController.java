@@ -15,8 +15,14 @@ class VetController {
     }
 
     @GetMapping("/{id}")
-    public @ResponseBody VetDTO findById(@PathVariable Long id) {
-        return vetService.findById(id);
+    public @ResponseBody ResponseEntity<VetDTO> findById(@PathVariable Long id) {
+        try {
+            return ResponseEntity.ok(vetService.findById(id));
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().build();
+        }
     }
 
 }
