@@ -26,6 +26,7 @@ public class OwnerControllerTest {
     @Container
     @ServiceConnection
     static PostgreSQLContainer<?> container = new PostgreSQLContainer<>("postgres:17.0-alpine");
+
     @Autowired
     private MockMvc mockMvc;
 
