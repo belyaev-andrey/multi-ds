@@ -26,9 +26,9 @@ class StatsDatasourceConfig {
 
     @Bean
     public DataSourceInitializer ds3DataSourceInitializer(@Qualifier("ds3DataSource") DataSource dataSource, ResourceLoader resourceLoader) {
-        Resource schema = resourceLoader.getResource("classpath:db/derby/schema.sql");
-        Resource data = resourceLoader.getResource("classpath:db/derby/data.sql");
-        Resource cleanup = resourceLoader.getResource("classpath:db/derby/drop.sql");
+        Resource schema = resourceLoader.getResource("classpath:db/h2/schema.sql");
+        Resource data = resourceLoader.getResource("classpath:db/h2/data.sql");
+        Resource cleanup = resourceLoader.getResource("classpath:db/h2/drop.sql");
 
 
         DataSourceInitializer initializer = new DataSourceInitializer();

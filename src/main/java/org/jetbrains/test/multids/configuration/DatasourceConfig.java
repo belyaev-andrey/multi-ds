@@ -51,9 +51,9 @@ public class DatasourceConfig implements BeanClassLoaderAware {
     public DataSource ds3DataSource() {
         return DataSourceBuilder
                 .create(classloader)
-                .driverClassName("org.apache.derby.iapi.jdbc.AutoloadedDriver")
-                .url("jdbc:derby:derbyDB;create=true")
-                .username("")
+                .driverClassName("org.h2.Driver")
+                .url("jdbc:h2:./h2DB;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE")
+                .username("sa")
                 .password("")
                 .build();
     }

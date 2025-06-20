@@ -24,7 +24,7 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("jakarta.validation:jakarta.validation-api:3.0.2")
-	implementation ("org.apache.derby:derby:10.17.1.0")
+	implementation("com.h2database:h2:2.2.224")
 	testImplementation("org.testcontainers:junit-jupiter")
 	testImplementation("org.springframework.boot:spring-boot-testcontainers")
 	testImplementation("org.testcontainers:mysql")
